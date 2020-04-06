@@ -9,28 +9,28 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            >
+            fx:controller="org.easyeditor.Controller">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu text="File">
                     <items>
-                        <MenuItem accelerator="Ctrl+N" text="New" />
-                        <MenuItem accelerator="Ctrl+O" text="Open" />
-                        <MenuItem accelerator="Ctrl+S" text="Save" />
-                        <MenuItem accelerator="Ctrl+Shift+S" text="Save as..." />
-                        <MenuItem accelerator="Ctrl+P" text="Print" />
-                        <MenuItem text="Close" />
+                        <MenuItem accelerator="Ctrl+N" text="New" onAction="#onNew"/>
+                        <MenuItem accelerator="Ctrl+O" text="Open" onAction="#onLoad"/>
+                        <MenuItem accelerator="Ctrl+S" text="Save" onAction="#onSave"/>
+                        <MenuItem accelerator="Ctrl+Shift+S" text="Save as..." onAction="#onSaveAs"/>
+                        <MenuItem accelerator="Ctrl+P" text="Print" onAction="#onPrint"/>
+                        <MenuItem text="Close" onAction="#onClose"/>
                     </items>
                 </Menu>
-                <Menu fx:id="mHistory" text="History" >
+                <Menu fx:id="mHistory" text="History" onShowing="#onHistory">
                     <items>
                         <MenuItem text="Last save file's"/>
                     </items>
                 </Menu>
                 <Menu text="Help">
                     <items>
-                        <MenuItem text="About" />
+                        <MenuItem text="About" onAction="#onAbout"/>
                     </items>
                 </Menu>
             </menus>
