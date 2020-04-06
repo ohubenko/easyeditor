@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -19,7 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("main.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/org.easyeditor/main.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
