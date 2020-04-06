@@ -15,3 +15,10 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+javafx{
+    modules = ['javafx.controls','javafx.fxml']
+    version = 14
+}
+
+mainClassName = 'org.easyeditor.Main'
