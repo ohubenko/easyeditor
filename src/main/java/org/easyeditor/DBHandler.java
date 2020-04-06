@@ -48,7 +48,7 @@ public class DBHandler {
 
     public ResultSet getLastFiles() {
         ResultSet resultSet = null;
-        String select = "SELECT * FROM " + System.getenv("TABLE") + " ORDER BY id DESC LIMIT 10";
+        String select = "SELECT * FROM openingfiles ORDER BY id DESC LIMIT 10";
         try {
             PreparedStatement st = getDbConnection().prepareStatement(select);
             resultSet = st.executeQuery();

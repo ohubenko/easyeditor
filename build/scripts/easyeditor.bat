@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\easyeditor-1.0-SNAPSHOT.jar;%APP_HOME%\lib\javafx-fxml-14-win.jar;%APP_HOME%\lib\javafx-controls-14-win.jar;%APP_HOME%\lib\javafx-controls-14.jar;%APP_HOME%\lib\javafx-graphics-14-win.jar;%APP_HOME%\lib\javafx-graphics-14.jar;%APP_HOME%\lib\javafx-base-14-win.jar;%APP_HOME%\lib\javafx-base-14.jar
+set CLASSPATH=%APP_HOME%\lib\easyeditor-1.0-SNAPSHOT.jar;%APP_HOME%\lib\postgresql-42.2.12.jar;%APP_HOME%\lib\javafx-fxml-14-win.jar;%APP_HOME%\lib\javafx-controls-14-win.jar;%APP_HOME%\lib\javafx-controls-14.jar;%APP_HOME%\lib\javafx-graphics-14-win.jar;%APP_HOME%\lib\javafx-graphics-14.jar;%APP_HOME%\lib\javafx-base-14-win.jar;%APP_HOME%\lib\javafx-base-14.jar
 
 @rem Execute easyeditor
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %EASYEDITOR_OPTS%  -classpath "%CLASSPATH%" org.easyeditor.Main %CMD_LINE_ARGS%

@@ -164,7 +164,6 @@ public class Controller {
         }catch (SQLException ex){
             ex.getMessage();
         }
-
     }
 
     private String loadContent(File file) {
