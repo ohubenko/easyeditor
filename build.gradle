@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.12.0'
 }
 
 group 'org.easyeditor'
@@ -16,19 +17,27 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.12'
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
 }
 
 javafx{
     modules = ['javafx.controls','javafx.fxml']
     version = 14
 }
+jlink {
+    launcher {
+        name = 'org.easyeditor.Main'
+    }
+}
 
 mainClassName = 'org.easyeditor.Main'
 jar {
     manifest {
-        attributes(
-//                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                'Main-Class': 'org.easyeditor.Main'
-        )
+        attributes 'Main-Class': 'org.easyeditor.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

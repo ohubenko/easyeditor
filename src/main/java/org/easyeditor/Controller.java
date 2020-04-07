@@ -101,7 +101,7 @@ public class Controller {
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         fileChooser.setInitialDirectory(new File("./"));
         File file = fileChooser.showOpenDialog(statusBar.getScene().getWindow());
-        model.loadFile(file);
+        this.model.loadFile(file);
         areaText.setText(this.model.getOpenFile().getTextInFile());
         statusBar.getChildren().clear();
         statusBar.getChildren().add(new Label(file.toString()));
