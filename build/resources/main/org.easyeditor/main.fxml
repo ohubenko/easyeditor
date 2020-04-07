@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.easyeditor.Controller">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem accelerator="Ctrl+N" text="New" onAction="#onNew"/>
+                        <MenuItem accelerator="Ctrl+O" text="Open" onAction="#onLoad"/>
+                        <MenuItem accelerator="Ctrl+S" text="Save" onAction="#onSave"/>
+                        <MenuItem accelerator="Ctrl+Shift+S" text="Save as..." onAction="#onSaveAs"/>
+                        <MenuItem accelerator="Ctrl+P" text="Print" onAction="#onPrint"/>
+                        <MenuItem text="Close" onAction="#onClose"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="mHistory" text="History" onShowing="#onHistory">
+                    <items>
+                        <MenuItem text="Last save file's"/>
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="About" onAction="#onAbout"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <bottom>
+        <HBox fx:id="statusBar" prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER"/>
+    </bottom>
+    <center>
+        <TextArea fx:id="areaText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+    </center>
+</BorderPane>

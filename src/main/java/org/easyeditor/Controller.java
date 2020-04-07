@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 
+import com.sun.scenario.effect.Blend;
 import javafx.fxml.FXML;
 import javafx.print.PageLayout;
 import javafx.print.PrinterJob;
@@ -27,9 +28,7 @@ public class Controller {
     @FXML
     private Menu mHistory;
 
-    private String textInFile;
-
-    private File file = null;
+    private Model model = new Model();
     private DBHandler dbHandler = new DBHandler();
 
     @FXML
@@ -40,25 +39,25 @@ public class Controller {
     @FXML
     void onNew() {
         areaText.setText("");
-        this.file = null;
+        this.model.clear();
         statusBar.getChildren().clear();
     }
 
     @FXML
     void onSave() {
-        if (!areaText.getText().equals(textInFile)) {
-            if (this.file == null)
+        if (!areaText.getText().equals(model.getOpenFile().getTextInFile())) {
+            if (this.model.getOpenFile().getFile() == null)
                 onSaveAs();
             else {
                 String text = areaText.getText();
                 try {
-                    saveFile(this.file, text);
-                    dbHandler.add(this.file, new Timestamp(System.currentTimeMillis()));
+                    model.saveFile(text);
+                    dbHandler.add(this.model.getOpenFile().getFile(), new Timestamp(System.currentTimeMillis()));
                 } catch (IOException ex) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
                     alert.setTitle("Error");
-                    alert.setContentText("Error saving file '" + this.file.toString() + "'");
+                    alert.setContentText("Error saving file '" + this.model.getOpenFile().getFile().toString() + "'");
                     alert.show();
                 }
             }
@@ -77,11 +76,11 @@ public class Controller {
         String text = areaText.getText();
         if (file != null) {
             try {
-                saveFile(file, text);
+                this.model.saveFile(text,file);
                 statusBar.getChildren().clear();
                 statusBar.getChildren().add(new Label(file.toString()));
-                this.file = file;
-                this.textInFile = areaText.getText();
+                this.model.getOpenFile().load(file);
+                this.model.getOpenFile().setTextInFile(areaText.getText());
                 dbHandler.add(file, new Timestamp(System.currentTimeMillis()));
             } catch (IOException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -102,14 +101,7 @@ public class Controller {
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         fileChooser.setInitialDirectory(new File("./"));
         File file = fileChooser.showOpenDialog(statusBar.getScene().getWindow());
-        System.out.println(fileChooser.getInitialDirectory());
-        if (file != null) {
-            areaText.setText(loadContent(file));
-            statusBar.getChildren().clear();
-            statusBar.getChildren().add(new Label(file.toString()));
-            this.file = file;
-        }
-
+        model.loadFile(file);
     }
 
     @FXML
@@ -152,10 +144,10 @@ public class Controller {
                 mi.setOnAction(event -> {
                     File file = new File(fileName);
                     if (file != null) {
-                        areaText.setText(loadContent(file));
+                        this.model.getOpenFile().load(file);
                         statusBar.getChildren().clear();
                         statusBar.getChildren().add(new Label(file.toString()));
-                        this.file = file;
+                        areaText.setText(this.model.getOpenFile().getTextInFile());
                     }
 
                 });
@@ -164,34 +156,6 @@ public class Controller {
         }catch (SQLException ex){
             ex.getMessage();
         }
-    }
-
-    private String loadContent(File file) {
-        String line = null;
-        String fullText = "";
-        try {
-            FileReader fileReader = new FileReader(file.toString());
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((line = bufferedReader.readLine()) != null) {
-                fullText = fullText.concat(line + '\n');
-            }
-            bufferedReader.close();
-        } catch (IOException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Error reading file '" + file.toString() + "'");
-            alert.show();
-        }
-        this.textInFile = fullText;
-        return fullText;
-    }
-
-    private void saveFile(File file, String text) throws IOException {
-        FileWriter fileWriter = new FileWriter(file);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        fileWriter.write(text);
-        bufferedWriter.close();
     }
 
 }
