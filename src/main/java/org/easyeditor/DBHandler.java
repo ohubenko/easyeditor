@@ -7,6 +7,14 @@ import java.sql.*;
 public class DBHandler {
     Connection dbConnection;
 
+//    public DBHandler() throws ClassNotFoundException, SQLException {
+//        String connectionString = "jdbc:postgresql://localhost:5432/EasyEditor";
+//        Class.forName("org.postgresql.Driver");
+//        System.out.println("Driver load successful");
+//        dbConnection = DriverManager.getConnection(connectionString, System.getenv("dbUser"),
+//                System.getenv("dbPass"));
+//    }
+
     public Connection getDbConnection() throws ClassNotFoundException, SQLException {
         String connectionString = "jdbc:postgresql://localhost:5432/EasyEditor";
         Class.forName("org.postgresql.Driver");

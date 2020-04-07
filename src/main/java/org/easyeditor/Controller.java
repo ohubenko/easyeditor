@@ -102,6 +102,9 @@ public class Controller {
         fileChooser.setInitialDirectory(new File("./"));
         File file = fileChooser.showOpenDialog(statusBar.getScene().getWindow());
         model.loadFile(file);
+        areaText.setText(this.model.getOpenFile().getTextInFile());
+        statusBar.getChildren().clear();
+        statusBar.getChildren().add(new Label(file.toString()));
     }
 
     @FXML

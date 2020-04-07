@@ -1,13 +1,16 @@
 package org.easyeditor;
 
+
 import javafx.scene.control.Alert;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class TextFile {
 
     private File file = null;
-    private String textInFile="";
+    private String textInFile = "";
 
     public File getFile() {
         return file;
@@ -28,12 +31,12 @@ public class TextFile {
     public void load(File file) {
         if (file != null) {
             this.file = file;
-            textInFile = loadContent(file);
+            this.textInFile = loadContent(this.file);
         }
     }
 
     public void saveFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(this.file);
+        FileWriter fileWriter = new FileWriter(this.file, StandardCharsets.UTF_8);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         fileWriter.write(textInFile);
         bufferedWriter.close();
@@ -43,8 +46,8 @@ public class TextFile {
         String line = null;
         String fullText = "";
         try {
-            FileReader fileReader = new FileReader(file.toString());
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file),
+                    StandardCharsets.UTF_8));
             while ((line = bufferedReader.readLine()) != null) {
                 fullText = fullText.concat(line + '\n');
             }
@@ -56,6 +59,7 @@ public class TextFile {
             alert.setContentText("Error reading file '" + file.toString() + "'");
             alert.show();
         }
+
         return fullText;
     }
 

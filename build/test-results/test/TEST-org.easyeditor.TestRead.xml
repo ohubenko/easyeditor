@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.easyeditor.TestRead" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-04-07T19:32:49" hostname="GubenkoOVPC" time="0.011">
+  <properties/>
+  <testcase name="testEn" classname="org.easyeditor.TestRead" time="0.006"/>
+  <testcase name="testRu" classname="org.easyeditor.TestRead" time="0.002"/>
+  <testcase name="testUa" classname="org.easyeditor.TestRead" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
